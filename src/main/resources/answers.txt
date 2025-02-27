@@ -1,0 +1,75 @@
+0#Racism based on gender#0
+0#Racism based on race#10
+0#Racism based on religion#0
+1#Owning a house#0
+1#Overconsumption#0
+1#Losing a job#10
+2#Plastic#10
+2#Metal#0
+2#Wood#0
+3#Forced Labor#10
+3#Organ trafficking#0
+3#Drug trafficking#0
+4#500 million#0
+4#1 billion#0
+4#745 million#10
+5#Lung cancer#10
+5#Pneumonia#0
+5#Asthma#0
+6#Illegal hacking#0
+6#Online harassment#10
+6#In person bullying#0
+7#War and conflict#10
+7#Overpopulation#0
+7#Lack of farmland#0
+8#Hate crimes#0
+8#Media propaganda#0
+8#Technical Advancements#10
+9#Volcanoes#10
+9#Deforestation#0
+9#Transportation#0
+10#Retail industry#0
+10#Fashion boutiques#0
+10#Factories and farms#10
+11#USA#0
+11#Iran#10
+11#Turkey#0
+12#Water infrastructure#0
+12#Air humidity#10
+12#Climate change#0
+13#Factories and vehicles#10
+13#Global warming#0
+13#Forest fires#0
+14#One out of 4#10
+14#One out of 2#0
+14#One out of 10#0
+15#Online bullying#0
+15#Identity theft#10
+15#Hacking into companies#0
+16#USA#10
+16#Yemen#0
+16#China#0
+17#Social media algorithms#10
+17#Artifical Intelligence#0
+17#People cannot spot fake news#0
+18#Healthcare#0
+18#Education#0
+18#Manufacturing#10
+19#Choosing not to work#0
+19#Lacks of jobs in the market#10
+19#Lack of education#0
+20#Peer pressure#0
+20#Mental health disorder#10
+20#Social media influence#0
+21#Polio#10
+21#Tuberculosis#0
+21#Corona#0
+22#Melting glaciers and ice sheets#10
+22#Increased rainfall#0
+22#Ocean water expansion#0
+23#High costs oof digital devices#0
+23#People’s reluctance to use technology#10
+23#Lack of internet infrastructure#0
+24#Agricultural expansion#10
+24#Natural forest fires#0
+24#Urban expansion#0
