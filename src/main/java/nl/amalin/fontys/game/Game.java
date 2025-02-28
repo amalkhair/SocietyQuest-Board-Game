@@ -179,7 +179,8 @@ public class Game {
                         // Create the JLabel
                         JLabel label = new JLabel( questionList.get(questionNumber).getQuestionText());
 
-                        label.setFont(new Font("Courier", Font.BOLD, 17));  // Font name, style, size
+                        label.setFont(new Font("Courier", Font.BOLD, 17
+                        ));  // Font name, style, size
 
                         // Create the JOptionPane with the JComboBox
                         JOptionPane optionPane = new JOptionPane(new Object[] {label, comboBox}, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
