@@ -1,7 +1,8 @@
 # SocietyQuest-Board-Game
-SocietyQuestGame for Fontys STA_EN01 first project
 
 A multiplayer interactive educational game with questions on society related issues. Enjoy!
+
+Made as a startsemester first project for Fontys Hogescholen
 
 ---
 
@@ -14,7 +15,8 @@ A multiplayer interactive educational game with questions on society related iss
 - [Game Features](#game-features)
 - [Technologies Used](#technologies-used)
 - [How to Play](#how-to-play)
-- [Installation](#installation)
+- [Running societyQuest as JAR](#running-societyquest-game-as-jar)
+- [Building from source](#building-from-source)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -43,18 +45,34 @@ The game is built using **Java Swing** and provides a simple interface where you
    - If you answer incorrectly, you stay in your current position.
 4. Keep track of your incorrect answers—five wrong answers will make you lose the game.
 5. The goal is to reach the final tile without hitting five wrong answers.
-6. After the game, you can choose to **Restart** or **Exit**.
+6. After the game, your charachter automatically returns to the start.
 
-## Installation
+## Running SocietyQuest Game as JAR
+
+SocietyQuest Game can be built as a fat JAR file that contains all its dependencies and can be run as stand-alone application. 
+
+**Prerequisites**
+- Java 22 or higher should be available
+you can download the ready to use JAR file from the "Assets" section of the desired release from my GitHub releases page.
+
+**Build**
+- How this is done is independent of the artifact type you want to use and is documented in (#building-from-source)
+
+**Run**
+ ```bash
+java -cp societyQuest-0.1.jar/ nl.amalin.fontys.game.Game
+ ```
+## Building from source
+
 To get the game up and running on your local machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/society-quest.git
+   git clone [https://github.com/your-username/SocietyQuest-Board-Game.git]
    ```
 2. Navigate to the project directory:
    ```bash
-   cd society-quest
+   cd SocietyQuest-Board-Game
    ```
 3. Compile and run the Java program:
    ```bash
