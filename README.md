@@ -60,7 +60,7 @@ you can download the ready to use JAR file from the "Assets" section of the desi
 
 **Run**
  ```bash
-java -cp societyQuest-0.1.jar/ nl.amalin.fontys.game.Game
+java -jar /societyQuest-0.1-jar-with-dependencies.jar
  ```
 ## Building from source
 
