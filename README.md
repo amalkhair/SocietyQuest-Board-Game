@@ -35,7 +35,6 @@ The game is built using **Java Swing** and provides a simple interface where you
 ## Technologies Used
 - **Java Swing** for creating the graphical user interface (GUI).
 - **Object-Oriented Programming (OOP)** principles to structure the game.
-- **File handling** (if applicable) to save and load the player's progress.
 
 ## How to Play
 1. Click the **Start** button to begin the game.
@@ -52,7 +51,7 @@ The game is built using **Java Swing** and provides a simple interface where you
 SocietyQuest Game can be built as a fat JAR file that contains all its dependencies and can be run as stand-alone application. 
 
 **Prerequisites**
-- Java 22 or higher should be available
+- Java 23 or higher should be available
 you can download the ready to use JAR file from the "Assets" section of the desired release from my GitHub releases page.
 
 **Build**
@@ -60,7 +59,7 @@ you can download the ready to use JAR file from the "Assets" section of the desi
 
 **Run**
  ```bash
-java -jar /societyQuest-0.1-jar-with-dependencies.jar
+java -jar societyQuest-0.1.jar
  ```
 ## Building from source
 
@@ -68,7 +67,7 @@ To get the game up and running on your local machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/SocietyQuest-Board-Game.git]
+   git clone https://github.com/amalkhair/SocietyQuest-Board-Game.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -76,8 +75,8 @@ To get the game up and running on your local machine, follow these steps:
    ```
 3. Compile and run the Java program:
    ```bash
-   javac Game.java
-   java Game
+   mvn clean install
+   mvn exec:java
    ```
 
 **Note**: Ensure you have Java installed on your system before running the program.
