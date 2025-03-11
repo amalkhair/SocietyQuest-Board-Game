@@ -5,7 +5,7 @@
   <artifactId>societyQuest</artifactId>
   <name>societyQuest</name>
   <version>0.1</version>
-  <url>http://www.example.com</url>
+  <url>http://amalin.nl</url>
   <build>
     <resources>
       <resource>
@@ -51,6 +51,21 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>nl.amalin.fontys.game.Game</mainClass>
+        </configuration>
       </plugin>
     </plugins>
   </build>
