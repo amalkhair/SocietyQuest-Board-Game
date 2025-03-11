@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -14,27 +17,43 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.awt.Font;
+import java.util.stream.Collectors;
 
+/**
+ * The Game class represents the main game logic and user interface for the Society Quest Game.
+ */
 public class Game {
-    // array declaration
+    // Array declarations for positions
     static int[] posX;
     static int[] posY;
     static int numberOfMistakes = 0;
 
+    /**
+     * Initializes the positions of elements in the game.
+     *
+     * @param count the number of positions to initialize
+     * @param distance the distance between each position
+     */
     static void initializePositions(int count, int distance) {
         // array initialization
         posX = new int[count];
         posY = new int[count];
-        //  steps loop
+        // Steps loop
         // 15 = Fish distance from each gridline
         for (int i = 0; i < count; i++) {
             posX[i] = i * distance + 15;
             posY[i] = i * distance + 15;
         }
     }
-    // determines initial position variables
+
+    // Determines initial position variables
     static int x_pos = 15, y_pos = 15, x_axis_start = 0, y_axis_start = 0, questionNumber = 0, playerScore = 0;
 
+    /**
+     * The main method to start the game.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
 //        DbConnector dbConnector = new DbConnector();
 //
@@ -45,7 +64,7 @@ public class Game {
         URL urlDonald, urlCry = null;
         try {
             urlDonald = new URL("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3cwN241cDlkcHB3bmY1aXJyZ2lyd2J1cDRnNWJ1ODkxejlqc2dlNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Mjl0BsAgMGYTe/giphy.gif");
-            urlCry = new URL("        https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnpvcXV4aGRrMmY4d2dqb2FieWt2cmxyeDl3azEzdnNscGplcnNkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qQdL532ZANbjy/giphy.gif");
+            urlCry = new URL("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnpvcXV4aGRrMmY4d2dqb2FieWt2cmxyeDl3azEzdnNscGplcnNkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qQdL532ZANbjy/giphy.gif");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -67,22 +86,19 @@ public class Game {
         // its truth value.
 
         try {
-            // puts questions into map
-            List<String> allLinesQuestions = Files.readAllLines(Paths.get("src/main/resources/questions.txt"));
+            // Read questions from file and add to list
+            InputStream questionStream = Game.class.getClassLoader().getResourceAsStream("questions.txt");
+            if (questionStream == null) {
+                throw new IOException("questions.txt not found");
+            }
+            List<String> allLinesQuestions = new BufferedReader(new InputStreamReader(questionStream))
+                    .lines().collect(Collectors.toList());
             for (String line : allLinesQuestions) {
-                System.out.println(line);
-                // trims empty space
                 if (!line.trim().isEmpty()) {
-                    // splits
                     String[] q = line.split("#");
-
-                    //questions.put(Integer.parseInt(q[0]), q[1]);
-                    System.out.println(q[0]);
-                    System.out.println(q[1]);
                     Question question = new Question();
                     question.setQuestionNumber(Integer.parseInt(q[0]));
                     question.setQuestionText(q[1]);
-
                     questionList.add(question);
                 }
             }
@@ -93,8 +109,13 @@ public class Game {
             // example: 0#Deforestation#0 , 0#Burning fossil fuels#10 , 0#Agriculture#0
             // important sidenote: see comment on answerAndScore map.
 
-            List<String> allLinesAnswersAndScore = Files.readAllLines(Paths.get("src/main/resources/answers.txt"));
-
+            // Read answers and scores from file and associate with questions
+            InputStream answerStream = Game.class.getClassLoader().getResourceAsStream("answers.txt");
+            if (questionStream == null) {
+                throw new IOException("questions.txt not found");
+            }
+            List<String> allLinesAnswersAndScore = new BufferedReader(new InputStreamReader(answerStream))
+                    .lines().collect(Collectors.toList());
             int questionNumber = -1;
             Question question = new Question();
             // a loop that puts the values into the previous mentioned maps
@@ -108,9 +129,9 @@ public class Game {
                     String answerText = as[1];
                     int answerScore = Integer.parseInt(as[2]);
 
-                   Answer answer = new Answer();
-                   answer.setAnswerText(answerText);
-                   answer.setAnswerScore(answerScore);
+                    Answer answer = new Answer();
+                    answer.setAnswerText(answerText);
+                    answer.setAnswerScore(answerScore);
 
                     int q_num = Integer.parseInt(relatedQuestionNumber);
                     if (questionNumber != q_num) {
@@ -126,8 +147,7 @@ public class Game {
             e.printStackTrace();
         }
 
-        //framework
-
+        // Setup game window
         JFrame frame = new JFrame("Society Quest Game");
         int boardWidth = 20 * 32, boardHeight = 21 * 32;
         frame.setSize(boardWidth, boardHeight);
@@ -177,22 +197,19 @@ public class Game {
                         comboBox.setPreferredSize(new Dimension(400, 30));
 
                         // Create the JLabel
-                        JLabel label = new JLabel( questionList.get(questionNumber).getQuestionText());
-
-                        label.setFont(new Font("Courier", Font.BOLD, 17
-                        ));  // Font name, style, size
+                        JLabel label = new JLabel(questionList.get(questionNumber).getQuestionText());
+                        label.setFont(new Font("Courier", Font.BOLD, 17));  // Font name, style, size
 
                         // Create the JOptionPane with the JComboBox
                         JOptionPane optionPane = new JOptionPane(new Object[] {label, comboBox}, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
                         JDialog dialog = optionPane.createDialog(frame, "Question");
                         optionPane.setPreferredSize(new Dimension(frame.getWidth(), optionPane.getPreferredSize().height));
-                        System.out.println(frame.getX());
-                        System.out.println(frame.getY() - dialog.getHeight());
                         dialog.setLocation(frame.getX(), frame.getY() - dialog.getHeight());
                         dialog.pack();
                         dialog.setVisible(true);
 
-                        int result = (int) optionPane.getValue();
+                        int result = optionPane.getValue() == null ? JOptionPane.CANCEL_OPTION : (int) optionPane.getValue();
+
                         if (result == JOptionPane.CANCEL_OPTION) {
                             x_axis_start = x_axis;
                             y_axis_start = y_axis;
@@ -208,10 +225,11 @@ public class Game {
                         }
 //                        int score = av.get(selectedAnswer);
 
-                        //wrong messages: popup with message and player turns into different form ("dies")
+                        // Wrong messages: popup with message and player turns into different form ("dies")
                         if (score == 0) {
                             numberOfMistakes++;
-                            playerPanel.setImageLocation("src/main/resources/deadFish.png");
+                            String imageLocation =  "deadFish.png";
+                            playerPanel.setImageLocation(imageLocation);
                             String message = "<html><span style='font-size:16px;'> Attempt: " + numberOfMistakes + ". Better luck next time!</span></html>";
                             JOptionPane.showMessageDialog(
                                     frame,
@@ -221,15 +239,16 @@ public class Game {
                                     cryIcon
                             );
 
-                            // when the answer is right, the fish turns back to normal (or stays normal)
+                            // When the answer is right, the fish turns back to normal (or stays normal)
                         } else {
-                            playerPanel.setImageLocation("src/main/resources/player1.png");
+                            String imageLocation =  "player1.png";
+                            playerPanel.setImageLocation(imageLocation);
                             playerScore += score;
                             playerPanel.setScore(String.valueOf(playerScore));
                             x_axis++;
                             questionNumber++;
                         }
-                        if (numberOfMistakes >4) {
+                        if (numberOfMistakes > 4) {
                             x_axis_start = 0;
                             y_axis_start = 0;
                             numberOfMistakes = 0;
@@ -265,4 +284,7 @@ public class Game {
 
         frame.setVisible(true);
     }
+
+
+
 }

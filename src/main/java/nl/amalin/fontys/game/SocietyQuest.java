@@ -1,8 +1,15 @@
 package nl.amalin.fontys.game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
+/**
+ * The SocietyQuest class represents the main game board for the Society Quest Game.
+ */
 public class SocietyQuest extends JPanel {
     int boardWidth = 20 * 32; // board width = 320
     int boardHeight = 21 * 32; // board height = 672
@@ -11,13 +18,30 @@ public class SocietyQuest extends JPanel {
     private Rectangle rect;
 
     // Constructor
+    /**
+     * Constructor for SocietyQuest.
+     * Initializes the game board and loads the background image.
+     */
     SocietyQuest() {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
-        backgroundImage = new ImageIcon("src/main/resources/waterCartoon.jpeg").getImage().getScaledInstance(boardWidth, boardHeight, Image.SCALE_SMOOTH);
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("waterCartoon.jpeg")) {
+            if (is == null) {
+                throw new IOException("Image file not found: " + "waterCartoon.jpeg");
+            }
+            backgroundImage = new ImageIcon(ImageIO.read(is)).getImage().getScaledInstance(boardWidth, boardHeight, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 //        rect = new Rectangle(50, 50, 100, 100); // x, y, width, height
     }
 
     // responsible for all the drawing
+    /**
+     * Paints the component, including the background image and grid lines.
+     *
+     * @param g the Graphics object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Ensures proper rendering

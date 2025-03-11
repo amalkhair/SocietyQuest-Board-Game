@@ -11,8 +11,9 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
-          <include>*/.txt</include>
-          <include>*/.png</include>
+          <include>**/*.txt</include>
+          <include>**/*.png</include>
+          <include>**/*.jpeg</include>
         </includes>
       </resource>
     </resources>
@@ -33,6 +34,20 @@
                 </transformer>
               </transformers>
               <shadedArtifactAttached>false</shadedArtifactAttached>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/custom-docs</outputDirectory>
             </configuration>
           </execution>
         </executions>

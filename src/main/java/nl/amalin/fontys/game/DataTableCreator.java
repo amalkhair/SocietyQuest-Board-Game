@@ -2,16 +2,20 @@ package nl.amalin.fontys.game;
 
 import java.sql.*;
 
+/**
+ * The DataTableCreator class is responsible for creating the database tables and inserting initial data for the game.
+ */
 public class DataTableCreator {
     public static void main(String[] args) {
         String url = "jdbc:sqlite:game.db"; // Database file
 
-        // Create a table
+        // SQL statement for creating the question table
         String createTableQuestion = "CREATE TABLE IF NOT EXISTS question ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "question_text TEXT NOT NULL"
                 + ");";
 
+        // SQL statement for creating the answer table
         String createTableAnswer = "CREATE TABLE IF NOT EXISTS answer ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "qid INTEGER NOT NULL, "
@@ -20,16 +24,18 @@ public class DataTableCreator {
                 + "FOREIGN KEY (qid) REFERENCES question(id) ON DELETE CASCADE"
                 + ");";
 
-
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
 
-            // Create table
+            // Execute the SQL statement to create the question table
             stmt.execute(createTableQuestion);
             System.out.println("Table question created successfully.");
 
+            // Execute the SQL statement to create the answer table
             stmt.execute(createTableAnswer);
             System.out.println("Table answer created successfully.");
+
+            // SQL statement for inserting initial questions into the question table
             String insertQuestions = "INSERT INTO question (question_text) VALUES "
                     + "('What is racism?'),"
                     + "('What is a common cause of homelessness?'),"
@@ -57,7 +63,7 @@ public class DataTableCreator {
                     + "('Which factor most contributes to digital divide?'),"
                     + "('What is a major cause of deforestation in tropical areas?');";
 
-//            stmt.execute(insertQuestions);
+            // SQL statement for inserting initial answers into the answer table
             String insertAnswers = "INSERT INTO answer (qid, answer_text, score) VALUES "
                     + "(1, 'Racism based on gender', 0),"
                     + "(1, 'Racism based on race', 10),"
@@ -135,9 +141,9 @@ public class DataTableCreator {
                     + "(25, 'Natural forest fires', 0),"
                     + "(25, 'Urban expansion', 0);";
 
-
-//                        stmt.execute(insertAnswers);
-
+            // Uncomment the following lines to execute the insert statements
+            // stmt.execute(insertQuestions);
+            // stmt.execute(insertAnswers);
 
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
