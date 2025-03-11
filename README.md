@@ -84,6 +84,9 @@ To get the game up and running on your local machine, follow these steps:
 ## Contributing
 Contributions are welcome! If you'd like to improve the game or add new features, feel free to open a pull request or submit an issue.
 
+## API DOCS
+The API Documentation can be found [here](https://amalkhair.github.io/SocietyQuest-Board-Game/nl/amalin/fontys/game/Answer.html#constructor-detail)
+
 ### Steps to contribute:
 1. Fork this repository.
 2. Create a new branch.
